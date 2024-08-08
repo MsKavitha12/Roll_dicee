@@ -2,26 +2,34 @@
 var roll1 = null;
 var roll2 = null;
 
+// Initial prompt for rolling the dice
+document.querySelector("h1").innerHTML = "Player 1, roll the dice!";
+
 // Function to roll the first dice
 function rollFirstDice() {
-    roll1 = Math.floor(Math.random() * 6) + 1;
-    var randomdiceimage1 = "dice" + roll1 + ".png";
-    var randomimagesource1 = "images/" + randomdiceimage1;
-    var img1 = document.querySelectorAll("img")[0];
-    img1.setAttribute("src", randomimagesource1);
+    if (roll1 === null) {
+        roll1 = Math.floor(Math.random() * 6) + 1;
+        var randomdiceimage1 = "dice" + roll1 + ".png";
+        var randomimagesource1 = "images/" + randomdiceimage1;
+        var img1 = document.querySelectorAll("img")[0];
+        img1.setAttribute("src", randomimagesource1);
 
-    checkResult();
+        // Prompt Player 2 to roll
+        document.querySelector("h1").innerHTML = "Player 2, roll the dice!";
+    }
 }
 
 // Function to roll the second dice
 function rollSecondDice() {
-    roll2 = Math.floor(Math.random() * 6) + 1;
-    var randomdiceimage2 = "dice" + roll2 + ".png";
-    var randomimagesource2 = "images/" + randomdiceimage2;
-    var img2 = document.querySelectorAll("img")[1];
-    img2.setAttribute("src", randomimagesource2);
+    if (roll1 !== null && roll2 === null) {
+        roll2 = Math.floor(Math.random() * 6) + 1;
+        var randomdiceimage2 = "dice" + roll2 + ".png";
+        var randomimagesource2 = "images/" + randomdiceimage2;
+        var img2 = document.querySelectorAll("img")[1];
+        img2.setAttribute("src", randomimagesource2);
 
-    checkResult();
+        checkResult();
+    }
 }
 
 // Function to check if both dice have been rolled and display the result
@@ -38,6 +46,11 @@ function checkResult() {
         // Reset the rolls for the next round
         roll1 = null;
         roll2 = null;
+
+        // After result, prompt to roll again
+        setTimeout(function() {
+            document.querySelector("h1").innerHTML = "Player 1, roll the dice!";
+        }, 2000); // Delay for 2 seconds before prompting for the next round
     }
 }
 
