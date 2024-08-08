@@ -20,9 +20,17 @@ function rollDice() {
     }
 }
 
-// Add event listeners to the dice images
+// Add event listeners to each dice image
 var diceImages = document.querySelectorAll("img");
-diceImages.forEach(function(dice) {
-    dice.addEventListener("click", rollDice);
+
+diceImages[0].addEventListener("click", function() {
+    // Roll both dice when the first dice is clicked
+    rollDice();
 });
+
+diceImages[1].addEventListener("click", function() {
+    // Roll both dice when the second dice is clicked
+    rollDice();
+});
+
 
